@@ -3,11 +3,13 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import '../App.css'
 
 function NavBar() {
     return (
+        <div className='x'>
 
-        <Navbar expand="lg" className="bg-body-tertiary" >
+<Navbar expand="lg" className="bg-body-tertiary" >
             <Container fluid>
                 <Navbar.Brand href="#" style={{ color: '#54B435', fontSize: '30px' }}>Movies Library</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -17,11 +19,12 @@ function NavBar() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href='#' style={{ color: '#54B435', fontSize: '20px' }}>Home</Nav.Link>
-                        <Nav.Link href="#action2" style={{ color: '#54B435', fontSize: '20px' }}>About</Nav.Link>
+                        
+                        <Nav.Link href='/'  style={{ color: '#54B435', fontSize: '20px' }} >Home</Nav.Link>
+                        <Nav.Link href="#action2"  style={{ color: '#54B435', fontSize: '20px' }}>About</Nav.Link>
 
-                        <Nav.Link href="#" disabled style={{ color: '#54B435', fontSize: '20px' }}  >
-                        Now Playing
+                        <Nav.Link href="/favList"  style={{ color: '#54B435', fontSize: '20px' }} disabled  >
+                        FavList
                         </Nav.Link>
                     </Nav>
                     <Form className="d-flex">
@@ -36,6 +39,10 @@ function NavBar() {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+
+        </div>
+
+      
 
     );
 }
