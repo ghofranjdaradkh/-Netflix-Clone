@@ -6,13 +6,24 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-  
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 20px;
+  margin-top: 15px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+.bg-body-tertiary{
+  color:#54B435;
+  font-size:20px
+
 }
 
 .App-header {

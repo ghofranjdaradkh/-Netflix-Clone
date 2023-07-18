@@ -32,7 +32,7 @@ function Movie(props) {
 
 
 
-            <ModalMovie handleShow={handleShow} handleClose={handleClose} show={show} data={props.data} />
+            <ModalMovie handleShow={handleShow} handleClose={handleClose} show={show} data={props.data}  CommentHandler={props.CommentHandler}/>
 
 
         </>
