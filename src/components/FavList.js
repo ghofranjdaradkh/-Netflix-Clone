@@ -47,6 +47,7 @@ function FavList() {
       comment: updatedValue.current.value
     }
     setX(newComment)
+    console.log(X)
     let response = await fetch(url, {
       method: 'PUT',
       headers: {
