@@ -11,7 +11,7 @@ function NavBar() {
 
 <Navbar expand="lg" className="bg-body-tertiary" >
             <Container fluid>
-                <Navbar.Brand href="#" style={{ color: '#54B435', fontSize: '30px' }}>Movies Library</Navbar.Brand>
+                <Navbar.Brand href="/" style={{ color: '#54B435', fontSize: '30px' }}>Movies Library</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -23,7 +23,7 @@ function NavBar() {
                         <Nav.Link href='/'  style={{ color: '#54B435', fontSize: '20px' }} >Home</Nav.Link>
                         <Nav.Link href="#action2"  style={{ color: '#54B435', fontSize: '20px' }}>About</Nav.Link>
 
-                        <Nav.Link href="/favList"  style={{ color: '#54B435', fontSize: '20px' }} disabled  >
+                        <Nav.Link href='/favList'  style={{ color: '#54B435', fontSize: '20px' }}   >
                         FavList
                         </Nav.Link>
                     </Nav>

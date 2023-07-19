@@ -1,47 +1,116 @@
-// import Button from 'react-bootstrap/Button';/
-import Card from 'react-bootstrap/Card';
 
-function favList() {
+import Card from 'react-bootstrap/Card';
+import { useState, useEffect, useRef } from 'react';
+import { Button } from 'react-bootstrap';
+
+function FavList() {
 
   const [favMovie, setfavMovie] = useState([]);
+  const updatedValue = useRef('');
+  const [InputVisable, setInputVisable] = useState(false)
+  const [X, setX] = useState('')//to re render the new comment 
+
+
+
   async function handleFavMovie() {
-    const url = `${process.env.REACT_APP_SERVER_URL}/favList`;
+    const url = `${process.env.REACT_APP_URL}/movies`;
     let response = await fetch(url);
     let recivedData = await response.json();
-    setFavRecipe(recivedData);
-//   }
-  async function handleDelete(id){
-    const url = `${process.env.REACT_APP_SERVER_URL}/movies${id}`;
+    setfavMovie(recivedData);
+    // console.log(recivedData);
+  }
+
+
+  async function handleDelete(id) {
+    console.log(id);
+    const url = `${process.env.REACT_APP_URL}/movies/${id}`;
+
     let response = await fetch(url, {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json"
       },
     });
-    if(response.status === 204){
+    if (response.status === 204) {
       alert('deleted successfuly')
     }
     handleFavMovie();
+  }
+
+
+  async function handleUpdate(id) {
+
+
+    setInputVisable(!InputVisable)
+    const url = `${process.env.REACT_APP_URL}/movies/${id}`;
+    let newComment = {
+      comment: updatedValue.current.value
+    }
+    setX(newComment)
+    console.log(X)
+    let response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newComment)
+     
+
+    });
+
+    console.log(newComment)
+    const updateData = await response.json()
+    
+    console.log(updateData, "updateData")
+
+    if (response.status === 200) {
+      alert('UPDATED successfuly')
+    }
+    handleFavMovie();
+    
   }
   useEffect(() => {
     handleFavMovie();
   }, []);
 
-    
-  
-  return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-  );
-  }
 
-export default favList;
+
+  return (
+    <>
+
+
+      {favMovie.map((object, id) => (
+        <div className='fav' key={id}>
+
+          <Card style={{ width: '18rem' }} >
+            <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${object.poster_path}`} />
+            <Card.Body>
+              <Card.Title>{object.title}</Card.Title>
+              <Card.Text>
+                {object.overview} <br />
+
+                <span>{`comment:${object.comment}`}</span>
+              </Card.Text>
+              <Button onClick={() => handleDelete(object.id)} variant="primary">Delete</Button>
+              <Button onClick={() => handleUpdate(object.id)} variant="primary">Update</Button>
+              {InputVisable && (
+                <input ref={updatedValue} type="text" placeholder="Edit comment..." />
+              )}
+
+
+
+
+
+
+            </Card.Body>
+
+
+          </Card>
+        </div>
+      ))}
+
+
+    </>
+  )
+}
+export default FavList
