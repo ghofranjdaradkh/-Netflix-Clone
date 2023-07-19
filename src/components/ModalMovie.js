@@ -8,24 +8,23 @@ function ModalMovie({ handleShow, handleClose, show, data, CommentHandler }) {
     const [Comment, setComment] = useState('')
     const commentInput = useRef('')
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         const userComment = commentInput.current.value
         setComment(userComment)// to re render 
         // console.log(data);
         const NewMovie = { ...data, userComment }
         CommentHandler(NewMovie, data.id)//this is function inside the home  
-        console.log(NewMovie)
+        console.log(NewMovie,"modalmovie",data.id)
     }
 
-
-    async function handleAddFav(e) {
+    async function HandleAddFav(e) {
         e.preventDefault();
-        let url = `${process.env.REACT_APP_SERVER_URL}/movies`;//send request
+        let url = `${process.env.REACT_APP_URL}/movies`;//send request
         let newData = {
             title: data.title,
+            poster_path:data.poster_path,
             overview: data.overview,
-            poster_path: data.poster_path,
             comment: data.comment
         }
         let response = await fetch(url, {
@@ -33,12 +32,12 @@ function ModalMovie({ handleShow, handleClose, show, data, CommentHandler }) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(newData)
+            body: JSON.stringify(newData)//send to body
         })
         let favoriteMov = await response.json();
         console.log('favoriteMov', favoriteMov);
-        if (response.status === 201) {
-          alert('added successfuly')
+        if (response.status === 200) {
+          alert('added favorite movie successfuly')}}
         
          
 
@@ -58,9 +57,9 @@ function ModalMovie({ handleShow, handleClose, show, data, CommentHandler }) {
                     <Form.Label>add comment</Form.Label>
                     <Form.Control as="textarea" rows={1} ref={commentInput} />
                     <Button type="submit" onClick={handleSubmit} variant="success">submit</Button>{' '}
-                    <Button type='submit' onClick={(e) => handleAddFav(e)} variant="warning">add to FavList</Button>{' '}
+                    <Button type='submit' onClick={(e)=>HandleAddFav(e)} variant="warning"> FavList</Button>{' '}
                 </Form.Group>
-                {data.userComment ? data.userComment : 'No comment'}
+                <p>{Comment ? Comment : 'No Comment'}</p>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
@@ -70,9 +69,8 @@ function ModalMovie({ handleShow, handleClose, show, data, CommentHandler }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {/* <FavList /> */}
+            
         </>
     );
-}}
-
+}
 export default ModalMovie;
