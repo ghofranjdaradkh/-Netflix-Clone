@@ -1,14 +1,14 @@
-// import Button from 'react-bootstrap/Button';/
+
 import Card from 'react-bootstrap/Card';
 import { useState, useEffect, useRef } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 function FavList() {
 
   const [favMovie, setfavMovie] = useState([]);
   const updatedValue = useRef('');
   const [InputVisable, setInputVisable] = useState(false)
-  const [X, setX] = useState('')
+  const [X, setX] = useState('')//to re render the new comment 
 
 
 
@@ -62,10 +62,11 @@ function FavList() {
     
     console.log(updateData, "updateData")
 
-    if (response.status === 204) {
+    if (response.status === 200) {
       alert('UPDATED successfuly')
     }
     handleFavMovie();
+    
   }
   useEffect(() => {
     handleFavMovie();
