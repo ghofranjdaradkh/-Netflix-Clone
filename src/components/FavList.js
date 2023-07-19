@@ -92,7 +92,7 @@ function FavList() {
               <Button onClick={() => handleDelete(object.id)} variant="primary">Delete</Button>
               <Button onClick={() => handleUpdate(object.id)} variant="primary">Update</Button>
               {InputVisable && (
-                <input ref={updatedValue} type="text" placeholder="Enter something..." />
+                <input ref={updatedValue} type="text" placeholder="Edit comment..." />
               )}
 
 
