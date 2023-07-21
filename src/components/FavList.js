@@ -40,7 +40,7 @@ function FavList() {
 
   async function handleUpdate(id) {
 
-
+if ( updatedValue.current.value!==null)
     setInputVisable(!InputVisable)
     const url = `${process.env.REACT_APP_URL}/movies/${id}`;
     let newComment = {
